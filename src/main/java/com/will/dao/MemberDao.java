@@ -3,15 +3,17 @@ package com.will.dao;
 import com.will.entity.Member;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface MemberDao {
-    Collection<Member> getAllMembers();
+    List<Member> findAll();
 
-    Member getMemberById(int id);
+    Member findById(int id);
 
-    void removeMemberById(int id);
+    void removeById(int id);
 
-    void updateMember(Member member);
+    //Update
+    void save(Member member);
 
-    void insertMember(Member member);
+    void insert(Member member);
 }

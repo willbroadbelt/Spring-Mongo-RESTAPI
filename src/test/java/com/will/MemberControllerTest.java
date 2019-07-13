@@ -34,12 +34,15 @@ public class MemberControllerTest {
 
     @Test
     public void getMember() throws Exception{
-        mvc.perform(MockMvcRequestBuilders.get("/members/2"))
+        mvc.perform(MockMvcRequestBuilders.get("/members/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"id\":2,\"name\":\"John\",\"type\":\"Free\"}"));
+                .andExpect(content().json("{\n" +
+                        "        \"id\": 1,\n" +
+                        "        \"name\": \"Clarice\",\n" +
+                        "        \"type\": \"Investigator\"\n" +
+                        "    }"));
     }
 
-    //TODO: Enforce order of tests as get members fails unless it goes first. Or, change tests...
     @Test
     public void insertAndCheck() throws Exception{
         int id = 5;
@@ -49,7 +52,11 @@ public class MemberControllerTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
-                .content(String.format("{\"id\":%d,\"name\":\"Freddy Lounds\",\"type\":\"Free\"}",id));
+                .content(String.format("{\n" +
+                        "        \"id\": %d,\n" +
+                        "        \"name\": \"Jack Crawford\",\n" +
+                        "        \"type\": \"Agent\"\n" +
+                        "    }",id));
 
         this.mvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -58,7 +65,11 @@ public class MemberControllerTest {
         //Check new member is present in db
         mvc.perform(MockMvcRequestBuilders.get("/members/5"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"id\":5,\"name\":\"Freddy Lounds\",\"type\":\"Free\"}"));
+                .andExpect(content().json("{\n" +
+                        "        \"id\": 5,\n" +
+                        "        \"name\": \"Jack Crawford\",\n" +
+                        "        \"type\": \"Agent\"\n" +
+                        "    }"));
 
     }
 }

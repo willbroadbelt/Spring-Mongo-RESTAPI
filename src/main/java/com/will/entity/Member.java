@@ -1,6 +1,11 @@
 package com.will.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "Members")
 public class Member {
+    @Id
     private int id;
     private String name;
     private String type;

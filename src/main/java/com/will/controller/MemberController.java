@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/members")
@@ -17,7 +18,7 @@ public class MemberController {
     private MemberService memberService;
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public Collection<Member> getAllMembers(){
+    public List<Member> getAllMembers(){
         return memberService.getAllMembers();
     }
 

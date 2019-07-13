@@ -4,16 +4,14 @@ import com.will.entity.Member;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /*
 * Psuedo database for members
 *
 * */
 @Repository
-@Qualifier("fakeData")
+@Qualifier("fakeDb")
 public class FakeMemberDaoImpl implements MemberDao {
 
     private static Map<Integer, Member> members;
@@ -32,22 +30,22 @@ public class FakeMemberDaoImpl implements MemberDao {
         };
     }
     @Override
-    public Collection<Member> getAllMembers(){
-        return this.members.values();
+    public List<Member> findAll(){
+        return new ArrayList<Member>(this.members.values());
     }
 
     @Override
-    public Member getMemberById(int id){
+    public Member findById(int id){
         return this.members.get(id);
     }
 
     @Override
-    public void removeMemberById(int id){
+    public void removeById(int id){
         this.members.remove(id);
     }
 
     @Override
-    public void updateMember(Member member){
+    public void save(Member member){
         Member m = this.members.get(member.getId());
         m.setName(member.getName());
         m.setType(member.getType());
@@ -56,7 +54,7 @@ public class FakeMemberDaoImpl implements MemberDao {
     }
 
     @Override
-    public void insertMember(Member member){
+    public void insert(Member member){
         this.members.put(member.getId(), member);
     }
 
