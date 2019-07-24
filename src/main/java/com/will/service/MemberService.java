@@ -15,6 +15,7 @@ public class MemberService {
     @Qualifier("mongoDb")
     private MongoDaoRepo memberDao;
 
+
     public List<Member> getAllMembers(){
         return memberDao.findAll();
     }
