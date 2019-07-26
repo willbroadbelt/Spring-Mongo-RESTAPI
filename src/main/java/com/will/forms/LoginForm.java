@@ -1,6 +1,6 @@
-package com.will.entity;
+package com.will.forms;
 
-public class SignupForm {
+public class LoginForm {
     private String email;
     private String password;
 

@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /*
 
@@ -25,11 +27,14 @@ public class UserDaoPopulator {
                 //Drop all Users
                 userDao.deleteAll();
                 ArrayList<String> password = HashPassword.generatePasswordHash("CarefullyChooseAPass");
+                List<String> locations = new ArrayList<>();
+                locations.add("Liverpool,UK");
+                locations.add("Washington,USA");
 
-                userDao.save(new User("clarice@starling.com", password));
-                userDao.save(new User("hannible@lector.com", password));
-                userDao.save(new User("will@graham.com", password));
-                userDao.save(new User("francis@dolarhyde.com", password));
+                userDao.save(new User("clarice@starling.com", password, locations));
+                userDao.save(new User("hannible@lector.com", password, locations));
+                userDao.save(new User("will@graham.com", password, locations));
+                userDao.save(new User("francis@dolarhyde.com", password, locations));
             }
         };
 
