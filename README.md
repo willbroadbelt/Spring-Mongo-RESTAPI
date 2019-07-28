@@ -28,7 +28,7 @@ Login with a POST (/login):
 ```
 {
            "email": "thismail@email.com",
-           "password": "FredickChilto"
+           "password": "YourPassword"
 }
 ```
 
