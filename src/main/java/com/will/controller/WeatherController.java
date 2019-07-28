@@ -1,6 +1,7 @@
 package com.will.controller;
 
 import com.will.service.UserService;
+import com.will.utils.OWMHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,18 @@ public class WeatherController {
     UserService userService;
 
     @RequestMapping(value = "/weather", method = RequestMethod.GET)
-    public ResponseEntity<String> weather(HttpSession session){
+    public ResponseEntity<String[]> weather(HttpSession session){
         String sessionEmail = session.getAttribute("email").toString();
         if(sessionEmail!=null){
             logger.info("Weather session email {}", sessionEmail);
-            List<String> locations = userService.getUserByEmail(sessionEmail).getLocations();
-            return new ResponseEntity<>("The locations associated with you are: "+locations, HttpStatus.OK);
+            List<String> locations = userService.getUserLocations(sessionEmail);
+            String[] weathers = OWMHandler.getAllLocationsWeather(locations);
+            return new ResponseEntity<>(weathers, HttpStatus.OK);
         }else{
             logger.info("Accessed weather without a session email");
-            return new ResponseEntity<>("No locations available", HttpStatus.NO_CONTENT);//TODO check http code
+            String[] error = new String[1];
+            error[0] = "No locations available";
+            return new ResponseEntity<>(error, HttpStatus.NO_CONTENT);
         }
 
     }

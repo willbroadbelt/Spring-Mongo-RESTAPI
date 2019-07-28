@@ -10,4 +10,6 @@ public class UserInputValidation {
     public static boolean userPassword(String password){
         return password.length()>6;
     }
+
+    //Add location validation
 }

@@ -35,6 +35,10 @@ public class UserService {
         return userDao.findByEmail(email);
     }
 
+    public List<String> getUserLocations(String email){
+        return this.getUserByEmail(email).getLocations();
+    }
+
     public void updateUser(User user){userDao.save(user);}
     public void removeUser(User user){ userDao.delete(user);}
 }
